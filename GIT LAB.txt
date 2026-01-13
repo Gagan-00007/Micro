@@ -1,0 +1,116 @@
+Experiment 1: Setting Up and Basic Commands [cite: 3, 4, 9, 11, 19, 21, 25] ---
+mkdir git_lab_exp1
+cd git_lab_exp1
+git init
+touch sample.txt
+git status
+git add sample.txt
+git commit -m "Initial commit Added sample.txt file"
+git log
+
+Experiment 2: Creating and Managing Branches [cite: 32, 35, 36, 41, 42, 48, 52, 55, 65] ---
+git branch feature-branch
+git checkout feature-branch
+# Alternatively: git switch feature-branch
+echo "This is a feature update" >> sample.txt
+git add sample.txt
+git commit -m "Added feature update in feature-branch"
+git checkout master
+git merge feature-branch
+git branch
+git log --oneline
+
+Experiment 3: Stashing Changes [cite: 69, 74, 84, 87, 93, 99, 116, 118] ---
+echo "Temporary changes for stash" >> sample.txt
+git stash
+git stash list
+git checkout feature-branch
+git stash apply
+git add sample.txt
+git commit -m "Applied stashed changes"
+
+Experiment 4: Collaboration (Cloning) [cite: 124, 135, 143, 144] ---
+# Note: Navigate out of the previous repo first if needed
+cd ..
+git clone https://github.com/sanjanaarun2023/bds306c.git
+cd bds306c
+git remote -v
+
+Experiment 5: Fetching and Rebasing [cite: 150, 156, 165, 168] ---
+git fetch origin
+git log origin/main --oneline
+git rebase origin/main
+
+Experiment 6: Merge with Custom Message [cite: 177, 179, 185, 187] ---
+git checkout main
+git merge feature-branch -m "Merged feature-branch into main"
+git log --oneline --graph
+
+Experiment 7: Git Tags [cite: 193, 194, 198] ---
+git tag v1.0
+git tag
+
+Experiment 8: Cherry-Picking [cite: 202, 203, 207, 208, 211, 231, 243] ---
+git checkout -b source-branch
+echo "Line 1-commit1" >> example.txt
+git add example.txt
+git commit -m "Commit 1: add line 1"
+echo "Line 2 commit 2" >> example.txt
+git add example.txt
+git commit -m "Commit 2: add line 2"
+echo "Line 3 commit3" >> example.txt
+git add example.txt
+git commit -m "Commit 3: add line 3"
+git checkout main
+# IMPORTANT: Replace <start-commit-id> and <end-commit-id> with actual IDs from 'git log'
+# Syntax: git cherry-pick <oldest-commit>^..<newest-commit>
+
+Experiment 9: Analysing History (Show Commit) [cite: 256, 257, 262, 264, 265, 268, 275] ---
+cd ..
+mkdir git-history-demo
+cd git-history-demo
+git init
+echo "This is my first file" > file.txt
+git add file.txt
+git commit -m "Initial commit: added file.txt"
+git log --oneline
+# IMPORTANT: Replace <commit-id> below with the hash you see in the log above
+# git show <commit-id>
+
+Experiment 10: History by Author [cite: 288, 289, 294, 296, 297, 298, 299, 302, 309] ---
+cd ..
+mkdir git-author-demo
+cd git-author-demo
+git init
+git config user.name "JohnDoe"
+git config user.email "johndoe@example.com"
+echo "First commit content" > demo.txt
+git add demo.txt
+git commit -m "Commit by JohnDoe in 2023"
+git log --author="John Doe" --since="2023-01-01" --until="2023-12-31" --oneline
+
+Experiment 11: Limit Log Output [cite: 314, 315, 320, 326, 330, 335, 339, 343, 347, 350, 354, 358, 362, 367]
+cd ..
+mkdir sanju
+cd sanju
+git init
+# (Create 5 commits as shown in manual)
+echo "Commit 1" > file.txt && git add file.txt && git commit -m "First commit"
+echo "Commit 2" > file.txt && git add file.txt && git commit -m "Second commit"
+echo "Commit 3" > file.txt && git add file.txt && git commit -m "Third commit"
+echo "Commit 4" > file.txt && git add file.txt && git commit -m "Fourth commit"
+echo "Commit 5" >> file.txt && git add file.txt && git commit -m "Fifth commit"
+git log -5
+
+Experiment 12: Analysing & Changing Git History (Undo Changes) ---
+mkdir exp12
+cd exp12
+git init
+echo "version 1" >> demo.txt
+git add demo.txt
+git commit -m "commit 1: add demo.txt"
+echo "version 2" >> demo.txt
+git add demo.txt
+git commit -m "commit 2: bad change"
+git log --oneline
+
